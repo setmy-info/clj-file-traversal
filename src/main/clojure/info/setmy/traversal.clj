@@ -4,6 +4,20 @@
     (:require [clojure.java.io :as io]
               [info.setmy.validation :as validation]))
 
+(defn extract-extension
+    "Extracts file extension from file object.
+
+    **Parameters:**
+
+    * **file** (java.io.File): A file.
+    "
+    [file]
+    (let [file-name         (.getName file)
+          last-dot-position (.lastIndexOf file-name ".")]
+        (if (and (> last-dot-position 0) (< last-dot-position (- (count file-name) 1)))
+            (subs file-name (inc last-dot-position))
+            nil)))
+
 (defn ^:private extract-file-info
     "Extracts file information from a java.io.File object.
 
@@ -15,13 +29,15 @@
 
      * A map containing file information."
     [file]
-    (let [name        (.getName file)
-          full-path   (.getAbsolutePath file)
-          file-length (.length file)]
-        {:file      file
-         :name      name
-         :full-path full-path
-         :length    file-length}))
+    (let [name           (.getName file)
+          full-path      (.getAbsolutePath file)
+          file-length    (.length file)
+          file-extension (extract-extension file)]
+        {:file           file
+         :name           name
+         :full-path      full-path
+         :file-length    file-length
+         :file-extension file-extension}))
 
 (defn ^:private process-file
     "Processes a file using the provided function [Example](example.com).
@@ -56,7 +72,8 @@
     [file-info]
     (println "Full path:" (:full-path file-info))
     (println "Name:" (:name file-info))
-    (println "Length:" (:length file-info)))
+    (println "Length:" (:file-length file-info))
+    (println "Extension:" (:file-extension file-info)))
 
 (defn -main
     "Entry point of the application. Traverses files starting from the specified root path.
