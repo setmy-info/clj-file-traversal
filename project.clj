@@ -7,12 +7,17 @@
      :url  "https://opensource.org/licenses/MIT"}
     :dependencies [[org.clojure/clojure "1.11.1"]]
     :plugins [[lein-codox "0.10.8"]]
-    :main ^:skip-aot clj-file-traversal.core
+    :main ^:skip-aot info.setmy.traversal
     :target-path "target/%s"
+    :source-paths ["src/main/clojure"]
+    :test-paths ["src/test/clojure"]
+    :resource-paths ["src/main/resources" "./target/classes"]
     :profiles
     {:uberjar {:aot      :all
                :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
+     :local   {}
      :dev     {}
+     :ci      {}
      :test    {}
      :prelive {}
      :live    {}}

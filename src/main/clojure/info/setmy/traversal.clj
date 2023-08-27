@@ -1,8 +1,8 @@
-(ns clj-file-traversal.core
+(ns info.setmy.traversal
     "Functionality for recursive file traversal with applying funtion to all files."
     (:gen-class)
     (:require [clojure.java.io :as io]
-              [clj-file-traversal.validation :as validation]))
+              [info.setmy.validation :as validation]))
 
 (defn ^:private extract-file-info
     "Extracts file information from a java.io.File object.

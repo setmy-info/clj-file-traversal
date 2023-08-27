@@ -1,7 +1,7 @@
-(ns clj-file-traversal.core-test
+(ns info.setmy.traversal-test
     (:require [clojure.test :refer :all]
               [clojure.string :as string]
-              [clj-file-traversal.core :refer :all]
+              [info.setmy.traversal :refer :all]
               [clojure.java.io :as io]
               [clojure.pprint :refer [pprint]]))
 
@@ -16,7 +16,7 @@
     (string/ends-with? (normalize-path string) suffix))
 
 (deftest test-traverse-files
-    (let [root-path "./test/resources/root"]
+    (let [root-path "./src/test/resources/root"]
         (let [visited-files (atom [])]
             (traverse-files (io/file root-path)
                             (fn [file-info]

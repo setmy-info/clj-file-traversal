@@ -1,4 +1,4 @@
-(ns clj-file-traversal.validation
+(ns info.setmy.validation
     "Command line parameters and values validation functionality."
     (:gen-class)
     (:require [clojure.java.io :as io]))
