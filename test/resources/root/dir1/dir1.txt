@@ -1,0 +1,2 @@
+dir1.txt
+This is something
