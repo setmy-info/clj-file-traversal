@@ -4,7 +4,7 @@
     (:require [clojure.java.io :as io]
               [info.setmy.validation :as validation]))
 
-(defn extract-extension
+(defn ^:private extract-extension
     "Extracts file extension from file object.
 
     **Parameters:**
