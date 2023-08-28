@@ -1,4 +1,4 @@
-(defproject info.setmy/clj-file-traversal "0.1.0-SNAPSHOT"
+(defproject info.setmy/clj-file-traversal "0.1.0"
     :description
     "Clojure module to apply function on every file in file hierarchy."
     :url "https://github.com/setmy-info/clj-file-traversal"

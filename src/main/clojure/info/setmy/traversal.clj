@@ -15,7 +15,7 @@
     (let [file-name         (.getName file)
           last-dot-position (.lastIndexOf file-name ".")]
         (if (and (> last-dot-position 0) (< last-dot-position (- (count file-name) 1)))
-            (subs file-name (inc last-dot-position))
+            (clojure.string/lower-case (subs file-name (inc last-dot-position)))
             nil)))
 
 (defn ^:private extract-file-info
@@ -29,15 +29,19 @@
 
      * A map containing file information."
     [file]
-    (let [name           (.getName file)
-          full-path      (.getAbsolutePath file)
-          file-length    (.length file)
-          file-extension (extract-extension file)]
-        {:file           file
-         :name           name
-         :full-path      full-path
-         :file-length    file-length
-         :file-extension file-extension}))
+    (let [name               (.getName file)
+          full-path          (.getAbsolutePath file)
+          file-length        (.length file)
+          file-extension     (extract-extension file)
+          last-modified-ms   (.lastModified file)
+          last-modified-date (java.util.Date. last-modified-ms)]
+        {:file               file
+         :name               name
+         :full-path          full-path
+         :length             file-length
+         :extension          file-extension
+         :last-modified-ms   last-modified-ms
+         :last-modified-date last-modified-date}))
 
 (defn ^:private process-file
     "Processes a file using the provided function [Example](example.com).
@@ -72,18 +76,6 @@
     [file-info]
     (println "Full path:" (:full-path file-info))
     (println "Name:" (:name file-info))
-    (println "Length:" (:file-length file-info))
-    (println "Extension:" (:file-extension file-info)))
-
-(defn -main
-    "Entry point of the application. Traverses files starting from the specified root path.
-
-    **Parameters:**
-
-    * **args** (string): Command-line arguments."
-    [& args]
-    (if (validation/validate-arguments args)
-        (let [file-path (first args)]
-            (println "Directory to be recursivelly handled:" file-path)
-            (traverse-files (io/file file-path) example-file-processor))
-        (println "Directori is not passed")))
+    (println "Length:" (:length file-info))
+    (println "Extension:" (:extension file-info))
+    (println "Last modify date:" (:last-modified-date file-info)))

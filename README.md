@@ -12,6 +12,8 @@ Build documentation
 
 ```shell
 lein codox
+# Or
+lein doc
 ```
 
 Build
@@ -26,21 +28,9 @@ Deploy to Clojars repository
 lein deploy clojars
 ```
 
-Run
-
-With lein:
-
-```shell
-lein run ./src/test/resources/root
-```
-
-With built uberjar:
-
-```shell
-java -jar ./target/uberjar/clj-file-traversal-1.0.0-SNAPSHOT-standalone.jar ./src/test/resources/root
-```
-
 ## TODO
 
 1. Codox to generate also documentation for private functions.
-2. 
+2. Codox: document map content once, for many functions and linking to that (like @see in JavaDocs)
+3. Directory handler function.
+4. Pass map with callback functions, filtering options.
